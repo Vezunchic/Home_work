@@ -10,6 +10,8 @@ namespace Lessons
     {
         static void Main(string[] args)
         {
+            string a = Console.ReadLine();
+            Console.WriteLine($"Привет, {a}, сегодня {DateTime.Now.ToString("D")}");
         }
     }
 }
