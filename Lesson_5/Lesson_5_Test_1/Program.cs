@@ -6,10 +6,11 @@ namespace Lesson_5_Test_1
     {
         static void Main(string[] args)
         {
-            string dataSet = "Набор данных: ";
+            Console.WriteLine("Введите с клавиатуры набор данных");
+            string dataSet = Console.ReadLine();
            
             File.WriteAllText("file_1.txt", dataSet);
-            File.AppendAllText("file_1.txt", "4513213");
+            
             string dataSet2 = File.ReadAllText("file_1.txt");
             Console.WriteLine(dataSet2);
         }

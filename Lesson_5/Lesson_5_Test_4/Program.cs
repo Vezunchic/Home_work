@@ -8,47 +8,40 @@ namespace Lesson_5_Test_4
         static void Main(string[] args)
         {
 
-            string path = Environment.CurrentDirectory;
+            string path = @"C:\Users\User\Desktop\Res\Lesson_5\Lesson_5_Test_4"; //Environment.CurrentDirectory;
             string nameFile = "List_1.txt";
-            string recursNameFile = "List_2.txt";
-            //RecursSavePath(path,recursNameFile);
-            SavePath(path, nameFile);
+            string nameFile_2 = "List_2.txt";
+
+            SavePathRecursion(path, nameFile);
             Console.WriteLine("Файлы созданы");
 
-
+            SavePath(path, nameFile_2);
 
 
         }
 
-        static void SavePath(string path, string file)
+        static void SavePathRecursion(string pathToFindToDirectoria, string pathToWriteFile)
         {
-            File.AppendAllLines(file, new[] { path });
-            string[] tree = Directory.EnumerateDirectories(path).ToArray();
-            
+            File.AppendAllLines(pathToWriteFile, new[] { pathToFindToDirectoria });
+            string[] tree = Directory.EnumerateDirectories(pathToFindToDirectoria).ToArray();
+            string[] fileTree = Directory.GetFiles(pathToFindToDirectoria);
+            File.AppendAllLines(pathToWriteFile, fileTree );
             for (int i = 0; i < tree.Length; i++)
             {
-                SavePath(tree[i], file);
 
+                SavePathRecursion(tree[i], pathToWriteFile);
+                
 
             }
 
-
+            
 
         }
-        /*static void RecursSavePath(string path, string file) // рекурсия
+        static void SavePath(string pathToFindToDirectoriam, string pathToWriteFile)
         {
-            File.AppendAllLines(file, new[] { path });
-            string[] treeItem = Directory.EnumerateFiles(path).ToArray();
+            string[] allfiles = Directory.GetFileSystemEntries(pathToFindToDirectoriam, "*.*", SearchOption.AllDirectories);
+            File.AppendAllLines(pathToWriteFile, allfiles);
 
-            for (int i = 0; i < treeItem.Length; i++)
-            {
-                SavePath(treeItem[i], file);
-
-            }
-        
-
-
-
-        }*/
+        }
     }
 }
